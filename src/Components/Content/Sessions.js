@@ -1,6 +1,7 @@
 import "./style.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Sessions({setFooterStatus}) {
@@ -22,9 +23,11 @@ export default function Sessions({setFooterStatus}) {
         return(<div className="center">Carregando...</div>)
     }
 
-    function Showtime ({name}){
+    function Showtime ({name, sessionId}){
         return(
-            <div className="button-showtime">{name}</div>
+            <Link to={`/assentos/${sessionId}`} style={{textDecoration:'none'}}>
+                <div className="button-showtime">{name}</div>
+            </Link>
         )
     }
 
@@ -33,7 +36,7 @@ export default function Sessions({setFooterStatus}) {
             <div>
                 <h2>{`${weekday} - ${date}`}</h2>
                 <div className="buttons-showtime">
-                    {showtimes.map((showtime => <Showtime key={showtime.id} name={showtime.name}/>))}
+                    {showtimes.map((showtime => <Showtime key={showtime.id} sessionId={showtime.id} name={showtime.name}/>))}
                 </div>
             </div>
         )
