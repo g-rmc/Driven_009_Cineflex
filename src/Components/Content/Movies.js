@@ -11,7 +11,6 @@ export default function Movies() {
         const promise = axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies');
 
         promise.then(obj => {
-            console.log(obj.data);
             setMovies(obj.data);
         })
     }, [])

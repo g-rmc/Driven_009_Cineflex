@@ -1,11 +1,19 @@
 import styled from "styled-components"
 
-export default function Footer() {
-    return(
-        <Container>
-            Aqui tem base
-        </Container>
-    )
+export default function Footer({footerStatus}) {
+
+    if (footerStatus.show === true) {
+        return (
+
+            <Container>
+                Aqui tem base
+            </Container>
+    
+        )
+    }
+    
+    return (<></>)
+
 }
 
 const Container = styled.div`

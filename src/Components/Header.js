@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Header() {
+export default function Header({setFooterStatus}) {
+
     return(
         
         <Container>
             <Link to="/" style={{textDecoration:'none'}}>
-                <h1>CINEFLEX</h1>
+                <h1 onClick={() => setFooterStatus({show: false})}>CINEFLEX</h1>
             </Link>     
         </Container>
     )
