@@ -1,4 +1,14 @@
-.footer{
+import styled from "styled-components"
+
+export default function Footer() {
+    return(
+        <Container>
+            Aqui tem base
+        </Container>
+    )
+}
+
+const Container = styled.div`
     width: 100%;
     height: 117px;
     background-color: #dfe6ed;
@@ -9,4 +19,4 @@
     position: absolute;
     bottom: 0;
     left: 0;
-}
+`

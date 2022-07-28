@@ -4,12 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./reset.css";
 import "./style.css";
 
-import Header from "../Header/Header";
+import Header from "../Header";
 import Movies from "../Content/Movies";
 import Sessions from "../Content/Sessions";
 import Seats from "../Content/Seats";
 import End from "../Content/End";
-import Footer from "../Footer/Footer";
+import Footer from "../Footer";
 
 export default function App(){
     return(
@@ -21,8 +21,8 @@ export default function App(){
                 <Routes>
 
                     <Route path="/" element={<Movies />} />
-                    <Route path="/filme/00" element={<Sessions />} />
-                    <Route path="/sessao/000" element={<Seats />} />
+                    <Route path="/sessoes/:idFilme" element={<Sessions />} />
+                    <Route path="/assentos/:idSessao" element={<Seats />} />
                     <Route path="/sucesso" element={<End />} />
 
                 </Routes>

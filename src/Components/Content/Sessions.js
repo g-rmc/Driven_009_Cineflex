@@ -1,9 +1,13 @@
 import "./style.css";
+import { useParams } from "react-router-dom";
 
 export default function Sessions() {
-    return(
+
+    const { idFilme } = useParams();
+
+    return (
         <div className="sessions">
-            Aqui tem sessões
+            Aqui tem sessões: {idFilme}
         </div>
     )
 }

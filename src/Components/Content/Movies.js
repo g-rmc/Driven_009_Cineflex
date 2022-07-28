@@ -1,6 +1,7 @@
 import "./style.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Movies() {
 
@@ -15,11 +16,13 @@ export default function Movies() {
         })
     }, [])
 
-    function Movie({posterURL, title}){
+    function Movie({movieId, posterURL, title}){
         return(
-            <div className="movie" onClick={() => (console.log('vai ter o link aqui'))}>
-                <img src={posterURL} alt={title}/>
-            </div>
+            <Link to={`/sessoes/${movieId}`}>
+                <div className="movie">
+                    <img src={posterURL} alt={title}/>
+                </div>         
+            </Link>
         )
     }
 
@@ -31,7 +34,7 @@ export default function Movies() {
         <div className="movies">
             <h1>Selecione o filme</h1>
             <div>
-                {movies.map(movie => <Movie key={movie.id} title={movie.title} posterURL={movie.posterURL}/>)}
+                {movies.map(movie => <Movie key={movie.id} movieId={movie.id} title={movie.title} posterURL={movie.posterURL}/>)}
             </div>
         </div>
     )
