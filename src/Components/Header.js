@@ -15,14 +15,15 @@ export default function Header({setFooterStatus}) {
 
 const Container = styled.div`
     width: 100%;
+    max-width: 600px;
     height: 67px;
     background-color: #c3cfd9;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
+    left: calc(100vw/2 - width/2);
 
     h1 {
         color: #e8833a;

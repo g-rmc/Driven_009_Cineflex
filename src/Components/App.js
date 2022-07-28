@@ -38,13 +38,14 @@ export default function App(){
 
 const Container = styled.div`
     background-color: #f3f3f3;
-    width: 100vw;
+    height: 100%;
+    min-height: 100vh;
     max-width: 600px;
-    height: 100vh;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     padding-top: 67px;
+    padding-bottom: 117px;
 `

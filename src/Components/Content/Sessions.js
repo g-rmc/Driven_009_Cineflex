@@ -10,10 +10,9 @@ export default function Sessions({setFooterStatus}) {
     const[sessions, setSessions] = useState([]);
 
     useEffect(() => {
-        const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`);
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`);
 
         promise.then(obj => {
-            console.log(obj.data);
             setFooterStatus({show: true});
             setSessions(obj.data);
         })
@@ -23,9 +22,27 @@ export default function Sessions({setFooterStatus}) {
         return(<div className="center">Carregando...</div>)
     }
 
+    function Showtime ({name}){
+        return(
+            <div className="button-showtime">{name}</div>
+        )
+    }
+
+    function Days({showtimes, date, weekday}){
+        return(
+            <div>
+                <h2>{`${weekday} - ${date}`}</h2>
+                <div className="buttons-showtime">
+                    {showtimes.map((showtime => <Showtime key={showtime.id} name={showtime.name}/>))}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="sessions">
-            Aqui tem sessões: {idFilme}
+            <h1>Selecione o horário:</h1>
+            {sessions.days.map(day => <Days key={day.id} showtimes={day.showtimes} date={day.date} weekday={day.weekday}/>)}
         </div>
     )
 }
