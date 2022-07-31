@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Movies() {
+export default function Movies({footerStatus}) {
 
     const[movies, setMovies] = useState([]);
 
@@ -18,7 +18,10 @@ export default function Movies() {
     function Movie({movieId, posterURL, title}){
         return(
             <Link to={`/sessoes/${movieId}`}>
-                <div className="movie">
+                <div className="movie" onClick={() => {
+                    footerStatus.title = title;
+                    footerStatus.posterURL = posterURL
+                }}>
                     <img src={posterURL} alt={title}/>
                 </div>         
             </Link>
@@ -27,7 +30,8 @@ export default function Movies() {
 
     if (movies.length === 0){
         return(<div className="center">Carregando...</div>)
-    }
+    };
+
 
     return(
         <div className="movies">

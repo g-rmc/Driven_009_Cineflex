@@ -12,7 +12,7 @@ import Footer from "./Footer";
 
 export default function App(){
 
-    const [footerStatus, setFooterStatus] = useState({show: false});
+    const [footerStatus, setFooterStatus] = useState({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''});
 
     return(
         <Container>
@@ -22,9 +22,9 @@ export default function App(){
 
                 <Routes>
 
-                    <Route path="/" element={<Movies />} />
-                    <Route path="/sessoes/:idFilme" element={<Sessions setFooterStatus={setFooterStatus}/>} />
-                    <Route path="/assentos/:idSessao" element={<Seats setFooterStatus={setFooterStatus}/>} />
+                    <Route path="/" element={<Movies footerStatus={footerStatus}/>} />
+                    <Route path="/sessoes/:idFilme" element={<Sessions setFooterStatus={setFooterStatus} footerStatus={footerStatus}/>} />
+                    <Route path="/assentos/:idSessao" element={<Seats setFooterStatus={setFooterStatus} footerStatus={footerStatus}/>} />
                     <Route path="/sucesso" element={<End setFooterStatus={setFooterStatus}/>} />
 
                 </Routes>

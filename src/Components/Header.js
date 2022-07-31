@@ -7,7 +7,7 @@ export default function Header({setFooterStatus}) {
         
         <Container>
             <Link to="/" style={{textDecoration:'none'}}>
-                <h1 onClick={() => setFooterStatus({show: false})}>CINEFLEX</h1>
+                <h1 onClick={() => setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})}>CINEFLEX</h1>
             </Link>     
         </Container>
     )
@@ -24,6 +24,7 @@ const Container = styled.div`
     position: fixed;
     top: 0;
     left: calc(100vw/2 - width/2);
+    z-index: 1;
 
     h1 {
         color: #e8833a;

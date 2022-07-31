@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Sessions({setFooterStatus}) {
+export default function Sessions({setFooterStatus, footerStatus}) {
 
     const { idFilme } = useParams();
 
@@ -14,19 +14,25 @@ export default function Sessions({setFooterStatus}) {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`);
 
         promise.then(obj => {
-            setFooterStatus({show: true});
+            setFooterStatus({...footerStatus, show: true});
             setSessions(obj.data);
         })
-    }, [])
+    }, []);
 
     if (sessions.length === 0){
         return(<div className="center">Carregando...</div>)
     }
 
-    function Showtime ({name, sessionId}){
+    function Showtime ({name, sessionId, weekday, date}){
         return(
             <Link to={`/assentos/${sessionId}`} style={{textDecoration:'none'}}>
-                <div className="button-showtime">{name}</div>
+                <div className="button-showtime" onClick={() => {
+                    footerStatus.weekday = weekday;
+                    footerStatus.date = date;
+                    footerStatus.time = name
+                }}>
+                    {name}
+                </div>
             </Link>
         )
     }
@@ -36,7 +42,13 @@ export default function Sessions({setFooterStatus}) {
             <div>
                 <h2>{`${weekday} - ${date}`}</h2>
                 <div className="buttons-showtime">
-                    {showtimes.map((showtime => <Showtime key={showtime.id} sessionId={showtime.id} name={showtime.name}/>))}
+                    {showtimes.map((showtime => <Showtime 
+                        key={showtime.id}
+                        sessionId={showtime.id}
+                        name={showtime.name}
+                        weekday={weekday}
+                        date={date}/>
+                    ))}
                 </div>
             </div>
         )
