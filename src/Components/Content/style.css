@@ -15,6 +15,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .movies {
@@ -112,16 +113,15 @@ h1 {
 }
 
 .seats-map {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, auto);
 }
 
-.seats-map div {
+.available, .notAvailable, .selected{
     width: 26px;
     height: 26px;
-    margin: 18px 7px;
+    margin-top: 18px;
     border-width: 1px;
     border-style: solid;
     border-radius: 12px;
@@ -160,4 +160,25 @@ h1 {
 
 .available:active, .selected:active {
     transform: translateY(2px);
+}
+
+.seats-legend{
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.seats-legend div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.seats-legend h6 {
+    font-size: 13px;
+    line-height: 15px;
+    color: #4E5A65;
 }

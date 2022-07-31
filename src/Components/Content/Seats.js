@@ -9,6 +9,9 @@ export default function Seats({setFooterStatus, footerStatus}) {
     const { idSessao } = useParams();
 
     const[seats, setSeats] = useState([]);
+    const[selected, setSelected] = useState({ids: [], seats:[], name:'', cpf:''});
+
+    const legend = [{class:'selected', title:'Selecionado'}, {class:'available', title:'Disponível'}, {class:'notAvailable', title:'Indisponível'}];
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
@@ -23,28 +26,46 @@ export default function Seats({setFooterStatus, footerStatus}) {
         return(<div className="center">Carregando...</div>)
     };
 
-    let seatsArr = seats.seats.map(seat => {
-        if (seat.isAvailable){
-            return {...seat, status: 'available'};
-        } else {
-            return {...seat, status: 'notAvailable'};
-        }
-    })
+    console.log(seats);
+    console.log(selected);
 
-    console.log(seats)
+    function Seat({ isAvailable, name, id }) {
 
-    function Seat({ status, name, id }) {
-
-        switch (status) {
-            case 'available':
-                return (<div className="available">{name}</div>);
-            case 'notAvailable':
-                return (<div className="notAvailable">{name}</div>);
+        switch (isAvailable) {
+            case true:
+                return (<div className="available" onClick={() => selSeat(name, id, true)}>{name}</div>);
+            case false:
+                return (<div className="notAvailable" onClick={() => alert('Esse assento não está disponível!')}>{name}</div>);
             case 'selected':
-                return (<div className="selected">{name}</div>);
+                return (<div className="selected" onClick={() => selSeat(name, id, 'selected')}>{name}</div>);
             default:
                 return(<>Erro!</>);
         }
+    }
+
+    function selSeat(name, id, status){
+ 
+        const indexArr = Number(name) - 1;
+
+        let newSelected = {...selected}
+
+        if (status === true){
+
+            seats.seats[indexArr].isAvailable = 'selected';
+
+            selected.ids.push(id);
+            selected.seats.push(name);
+
+        } else {
+
+            seats.seats[indexArr].isAvailable = true;
+
+            newSelected.ids = selected.ids.filter(value => value !== id);
+            newSelected.seats = selected.seats.filter(value => value !== name);
+        } 
+
+        setSeats({...seats});
+        setSelected(newSelected);
     }
 
     return(
@@ -52,12 +73,20 @@ export default function Seats({setFooterStatus, footerStatus}) {
             <h1>Selecione o(s) assento(s)</h1>
 
             <div className="seats-map">
-                {seatsArr.map(seat => <Seat key={seat.id} id={seat.id} name={seat.name} status={seat.status}/>)}
-                {/* CONFIGURAR A VISUALIZAÇÃO PARA FIXAR A ORDEM DOS ASSENTOS */}
+                
+                {seats.seats.map(seat => <Seat key={seat.id} id={seat.id} name={seat.name} isAvailable={seat.isAvailable}/>)}
+
             </div>
 
-            <div style={{color:'red'}}>
-                !!!Legenda de assentos!!!
+            <div className="seats-legend">
+
+                {legend.map(value => 
+                    <div>
+                        <div className={value.class}></div>
+                        <h6>{value.title}</h6>
+                    </div>
+                )}
+
             </div>
 
             <form>
