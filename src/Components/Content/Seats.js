@@ -1,5 +1,8 @@
 import "./style.css";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+//import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Seats({setFooterStatus, footerStatus}) {
 
@@ -16,6 +19,10 @@ export default function Seats({setFooterStatus, footerStatus}) {
             console.log(obj.data)
         })
     }, []);
+
+    if (seats.length === 0){
+        return(<div className="center">Carregando...</div>)
+    };
 
     return(
         <div className="seats">
