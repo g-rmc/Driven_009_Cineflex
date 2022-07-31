@@ -78,6 +78,7 @@ h1 {
     height: 43px;
     margin-right: 10px;
     background: #E8833A;
+    border: none;
     border-radius: 3px;
     font-size: 18px;
     color: white;
@@ -101,15 +102,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.seats form {
-    margin-top: 40px;
-    height: 160px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .seats-map {
@@ -184,4 +176,53 @@ h1 {
     font-size: 13px;
     line-height: 15px;
     color: #4E5A65;
+}
+
+.seats form {
+    height: 300px;
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.seats form h5{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    color: #293845;
+}
+
+.seats form input {
+    margin: 5px 0 10px 0;
+    width: 100%;
+    height : 50px;
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 3px;
+}
+
+.seats form button {
+    width: 60%;
+    height: 43px;
+    margin-right: 10px;
+    background: #E8833A;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 20px auto;
+}
+
+.seats form button:hover {
+    background-color: #b3632a;
+}
+
+.seats form button:active {
+    transform: translateY(2px);
 }

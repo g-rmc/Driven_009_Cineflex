@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
 import axios from "axios";
+import Form from "./Form";
 
 export default function Seats({setFooterStatus, footerStatus}) {
 
@@ -26,7 +27,6 @@ export default function Seats({setFooterStatus, footerStatus}) {
         return(<div className="center">Carregando...</div>)
     };
 
-    console.log(seats);
     console.log(selected);
 
     function Seat({ isAvailable, name, id }) {
@@ -89,13 +89,7 @@ export default function Seats({setFooterStatus, footerStatus}) {
 
             </div>
 
-            <form>
-                <h5>Nome do comprador:</h5>
-                <input></input>
-                
-                <h5>CPF do comprador:</h5>
-                <input></input>
-            </form>
+            <Form />
             
         </div>
     )
