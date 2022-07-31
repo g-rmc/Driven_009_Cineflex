@@ -40,6 +40,7 @@ const Container = styled.div`
     background-color: #f3f3f3;
     height: 100%;
     min-height: 100vh;
+    min-width: 300px;
     max-width: 600px;
     margin: 0 auto;
     display: flex;

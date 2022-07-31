@@ -56,7 +56,7 @@ export default function Sessions({setFooterStatus, footerStatus}) {
 
     return (
         <div className="sessions">
-            <h1>Selecione o horário:</h1>
+            <h1>Selecione o horário</h1>
             {sessions.days.map(day => <Days key={day.id} showtimes={day.showtimes} date={day.date} weekday={day.weekday}/>)}
         </div>
     )

@@ -16,7 +16,6 @@ export default function Seats({setFooterStatus, footerStatus}) {
         promise.then(obj => {
             setFooterStatus({...footerStatus});
             setSeats(obj.data);
-            console.log(obj.data)
         })
     }, []);
 
@@ -24,9 +23,50 @@ export default function Seats({setFooterStatus, footerStatus}) {
         return(<div className="center">Carregando...</div>)
     };
 
+    let seatsArr = seats.seats.map(seat => {
+        if (seat.isAvailable){
+            return {...seat, status: 'available'};
+        } else {
+            return {...seat, status: 'notAvailable'};
+        }
+    })
+
+    console.log(seats)
+
+    function Seat({ status, name, id }) {
+
+        switch (status) {
+            case 'available':
+                return (<div className="available">{name}</div>);
+            case 'notAvailable':
+                return (<div className="notAvailable">{name}</div>);
+            case 'selected':
+                return (<div className="selected">{name}</div>);
+            default:
+                return(<>Erro!</>);
+        }
+    }
+
     return(
         <div className="seats">
-            Aqui tem assentos: {`${idSessao}`}
+            <h1>Selecione o(s) assento(s)</h1>
+
+            <div className="seats-map">
+                {seatsArr.map(seat => <Seat key={seat.id} id={seat.id} name={seat.name} status={seat.status}/>)}
+                {/* CONFIGURAR A VISUALIZAÇÃO PARA FIXAR A ORDEM DOS ASSENTOS */}
+            </div>
+
+            <div style={{color:'red'}}>
+                !!!Legenda de assentos!!!
+            </div>
+
+            <form>
+                Nome do comprador:
+                <input></input>
+                CPF do comprador:
+                <input></input>
+            </form>
+            
         </div>
     )
 }

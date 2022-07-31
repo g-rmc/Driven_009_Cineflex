@@ -93,3 +93,71 @@ h1 {
 .button-showtime:active {
     transform: translateY(2px);
 }
+
+.seats {
+    width: 100%;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.seats form {
+    margin-top: 40px;
+    height: 160px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.seats-map {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.seats-map div {
+    width: 26px;
+    height: 26px;
+    margin: 18px 7px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    line-height: 13px;
+    color: #000000;
+}
+
+.available {
+    background: #C3CFD9;
+    border-color: #7B8B99;
+    cursor: pointer;
+}
+
+.available:hover{
+    background: #97a0a8;
+}
+
+.notAvailable {
+    background: #FBE192;
+    border: #F7C52B;
+}
+
+.selected {
+    background: #8DD7CF;
+    border-color: #1AAE9E;
+    cursor: pointer;
+}
+
+.selected:hover{
+    background: #67a19c;
+}
+
+.available:active, .selected:active {
+    transform: translateY(2px);
+}
