@@ -80,8 +80,8 @@ export default function Seats({setFooterStatus, footerStatus}) {
 
             <div className="seats-legend">
 
-                {legend.map(value => 
-                    <div>
+                {legend.map((value, index) => 
+                    <div key={index}>
                         <div className={value.class}></div>
                         <h6>{value.title}</h6>
                     </div>
@@ -90,9 +90,10 @@ export default function Seats({setFooterStatus, footerStatus}) {
             </div>
 
             <form>
-                Nome do comprador:
+                <h5>Nome do comprador:</h5>
                 <input></input>
-                CPF do comprador:
+                
+                <h5>CPF do comprador:</h5>
                 <input></input>
             </form>
             

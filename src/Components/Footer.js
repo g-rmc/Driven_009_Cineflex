@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export default function Footer({footerStatus}) {
 
-    let {show, title, posterURL, date, weekday, time} = footerStatus
+    let {show, title, posterURL, weekday, time} = footerStatus
 
     if (show === true) {
         return (
