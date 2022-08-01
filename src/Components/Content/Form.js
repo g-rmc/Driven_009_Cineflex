@@ -85,6 +85,7 @@ const Inputs = styled.form`
 
     input {
         margin: 5px 0 10px 0;
+        padding-left: 10px;
         width: 100%;
         height : 50px;
         background: #FFFFFF;

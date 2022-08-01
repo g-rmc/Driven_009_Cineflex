@@ -1,8 +1,8 @@
-import "./style.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "./Form";
+import styled from "styled-components";
 
 export default function Seats({setFooterStatus, footerStatus, selected, setSelected}) {
 
@@ -10,7 +10,10 @@ export default function Seats({setFooterStatus, footerStatus, selected, setSelec
 
     const[seats, setSeats] = useState([]);
 
-    const legend = [{class:'selected', title:'Selecionado'}, {class:'available', title:'Disponível'}, {class:'notAvailable', title:'Indisponível'}];
+    const legend = [    {class:<SeatSelected />, title:'Selecionado'},
+                        {class:<SeatAvailable />, title:'Disponível'}, 
+                        {class:<SeatNotAvailable />, title:'Indisponível'}
+                    ];
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
@@ -20,21 +23,23 @@ export default function Seats({setFooterStatus, footerStatus, selected, setSelec
             setFooterStatus({...footerStatus, show: true});
             setSeats(obj.data);
         })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (seats.length === 0){
-        return(<div className="center">Carregando...</div>)
+        return(<Loading>Carregando...</Loading>)
     };
 
     function Seat({ isAvailable, name, id }) {
 
         switch (isAvailable) {
             case true:
-                return (<div className="available" onClick={() => selSeat(name, id, true)}>{name}</div>);
+                return (<SeatAvailable onClick={() => selSeat(name, id, true)}>{name}</SeatAvailable>);
             case false:
-                return (<div className="notAvailable" onClick={() => alert('Esse assento não está disponível!')}>{name}</div>);
+                return (<SeatNotAvailable onClick={() => alert('Esse assento não está disponível!')}>{name}</SeatNotAvailable>);
             case 'selected':
-                return (<div className="selected" onClick={() => selSeat(name, id, 'selected')}>{name}</div>);
+                return (<SeatSelected onClick={() => selSeat(name, id, 'selected')}>{name}</SeatSelected>);
             default:
                 return(<>Erro!</>);
         }
@@ -66,28 +71,149 @@ export default function Seats({setFooterStatus, footerStatus, selected, setSelec
     }
 
     return(
-        <div className="seats">
+        <Container>
             <h1>Selecione o(s) assento(s)</h1>
 
-            <div className="seats-map">
+            <SeatsMap>
                 
                 {seats.seats.map(seat => <Seat key={seat.id} id={seat.id} name={seat.name} isAvailable={seat.isAvailable}/>)}
 
-            </div>
+            </SeatsMap>
 
-            <div className="seats-legend">
+            <Legend>
 
                 {legend.map((value, index) => 
                     <div key={index}>
-                        <div className={value.class}></div>
+                        {value.class}
                         <h6>{value.title}</h6>
                     </div>
                 )}
 
-            </div>
+            </Legend>
 
             <Form selected={selected} setSelected={setSelected} footerStatus={footerStatus} setFooterStatus={setFooterStatus}/>
             
-        </div>
+        </Container>
     )
 }
+
+const Loading = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const Container = styled.div`
+    width: 100%;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        height: 110px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 28px;
+        color: #293845;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+`
+
+const SeatsMap = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+
+    div {
+        width: 26px;
+        height: 26px;
+        margin-top: 18px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        line-height: 13px;
+        color: #000000;
+    }
+`
+
+const SeatAvailable = styled.div`
+    background: #C3CFD9;
+    border-color: #7B8B99;
+    cursor: pointer;
+
+    &:hover {
+        background: #97a0a8;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+`
+
+const SeatNotAvailable = styled.div`
+    background: #FBE192;
+    border-color: #F7C52B;
+`
+
+const SeatSelected = styled.div`
+    background: #8DD7CF;
+    border-color: #1AAE9E;
+    cursor: pointer;
+
+    &:hover {
+        background: #67a19c;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+`
+
+const Legend = styled.div `
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: auto;
+        pointer-events: none;
+    }
+
+    div div {
+        width: 26px;
+        height: 26px;
+        margin-top: 18px;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        line-height: 13px;
+        color: #000000;
+    }
+
+    h6 {
+        margin-top: 7px;
+        font-size: 13px;
+        line-height: 15px;
+        color: #4E5A65;
+    }
+`

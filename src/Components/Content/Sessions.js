@@ -1,8 +1,8 @@
-import "./style.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
 
 export default function Sessions({setFooterStatus, footerStatus}) {
 
@@ -18,22 +18,24 @@ export default function Sessions({setFooterStatus, footerStatus}) {
         promise.then(obj => {
             setSessions(obj.data);
         })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (sessions.length === 0){
-        return(<div className="center">Carregando...</div>)
+        return(<Loading>Carregando...</Loading>)
     }
 
     function Showtime ({name, sessionId, weekday, date}){
         return(
             <Link to={`/assentos/${sessionId}`} style={{textDecoration:'none'}}>
-                <div className="button-showtime" onClick={() => {
+                <Button onClick={() => {
                     footerStatus.weekday = weekday;
                     footerStatus.date = date;
                     footerStatus.time = name
                 }}>
                     {name}
-                </div>
+                </Button>
             </Link>
         )
     }
@@ -42,7 +44,7 @@ export default function Sessions({setFooterStatus, footerStatus}) {
         return(
             <div>
                 <h2>{`${weekday} - ${date}`}</h2>
-                <div className="buttons-showtime">
+                <ShowtimeList>
                     {showtimes.map((showtime => <Showtime 
                         key={showtime.id}
                         sessionId={showtime.id}
@@ -50,15 +52,75 @@ export default function Sessions({setFooterStatus, footerStatus}) {
                         weekday={weekday}
                         date={date}/>
                     ))}
-                </div>
+                </ShowtimeList>
             </div>
         )
     }
 
     return (
-        <div className="sessions">
+        <Container>
             <h1>Selecione o horário</h1>
             {sessions.days.map(day => <Days key={day.id} showtimes={day.showtimes} date={day.date} weekday={day.weekday}/>)}
-        </div>
+        </Container>
     )
 }
+
+const Loading = styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const Container = styled.div`
+    width: 100%;
+    padding: 0 30px;
+
+    h1 {
+        height: 110px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 28px;
+        color: #293845;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    h2 {
+        width: 100%;
+        font-size: 20px;
+        line-height: 23px;
+        color: #293845;
+    }
+`
+
+const ShowtimeList = styled.div`
+    margin: 30px 0;
+    display: flex;
+`
+
+const Button = styled.div`
+    width: 83px;
+    height: 43px;
+    margin-right: 10px;
+    background: #E8833A;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #b3632a;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+`
