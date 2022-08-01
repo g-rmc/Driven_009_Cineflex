@@ -14,6 +14,7 @@ export default function Seats({setFooterStatus, footerStatus, selected, setSelec
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`);
+        window.scrollTo(0,0);
 
         promise.then(obj => {
             setFooterStatus({...footerStatus});

@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Header({setFooterStatus}) {
+export default function Header({setFooterStatus, setSelected}) {
 
     return(
         
         <Container>
             <Link to="/" style={{textDecoration:'none'}}>
-                <h1 onClick={() => setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})}>
+                <h1 onClick={() => {
+                    setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})
+                    setSelected({ids: [], seats:[], name:'', cpf:''})
+                    }}>
                     CINEFLEX
                 </h1>
             </Link>     

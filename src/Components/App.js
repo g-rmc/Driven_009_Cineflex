@@ -19,7 +19,10 @@ export default function App(){
         <Container>
             <BrowserRouter>  
                 
-                <Header setFooterStatus={setFooterStatus}/>
+                <Header
+                    setFooterStatus={setFooterStatus}
+                    setSelected={setSelected}
+                />
 
                 <Routes>
 
@@ -42,6 +45,7 @@ export default function App(){
                     <Route path="/sucesso" element={<End 
                                                         setFooterStatus={setFooterStatus}
                                                         footerStatus={footerStatus}
+                                                        setSelected={setSelected}
                                                         selected={selected}
                                                         />} />
 

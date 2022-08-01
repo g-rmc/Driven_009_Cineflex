@@ -12,6 +12,7 @@ export default function Sessions({setFooterStatus, footerStatus}) {
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`);
+        window.scrollTo(0,0);
 
         promise.then(obj => {
             setFooterStatus({...footerStatus, show: true});

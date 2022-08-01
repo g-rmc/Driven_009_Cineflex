@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
 
-export default function End({setFooterStatus, footerStatus, selected}) {
+export default function End({setFooterStatus, footerStatus, setSelected, selected}) {
 
     return(
         <Container>
@@ -25,7 +25,10 @@ export default function End({setFooterStatus, footerStatus, selected}) {
             </div>
 
             <Link to="/" style={{textDecoration:'none'}}>
-                <button onClick={() => setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})}>
+                <button onClick={() => {
+                    setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})
+                    setSelected({ids: [], seats:[], name:'', cpf:''})
+                }}>
                     Voltar para Home
                 </button>    
             </Link>

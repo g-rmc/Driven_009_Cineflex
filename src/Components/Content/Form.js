@@ -11,6 +11,10 @@ export default function Form({selected, setSelected, setFooterStatus, footerStat
 
     function handleForm(event) {
         event.preventDefault();
+        if (selected.seats.length === 0){
+            alert('Você não escolheu seus assentos!!');
+            return;
+        }
         selected.name = name;
         selected.cpf = cpf;
         setSelected = {...selected};
@@ -27,12 +31,23 @@ export default function Form({selected, setSelected, setFooterStatus, footerStat
         promise.catch(() => alert('Tente novamente mais tarde :('))
     }
 
+    function formatCPF(e){
+        let v = e.replace(/\D/g,"");
+        v = v.replace(/(\d{3})(\d)/,"$1.$2");
+        v = v.replace(/(\d{3})(\d)/,"$1.$2"); 
+        v = v.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+    
+        setCpf(v);
+    } 
+
     return (
         <form onSubmit={handleForm}>
             <h5>Nome do comprador:</h5>
             <input
                 type="text"
                 value={name}
+                name='nome'
+                placeholder="Digite seu nome..."
                 onChange={(event) => setName(event.target.value)}
                 required
             />
@@ -42,7 +57,9 @@ export default function Form({selected, setSelected, setFooterStatus, footerStat
                 type="text"
                 pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})"
                 value={cpf}
-                onChange={(event) => setCpf(event.target.value)}
+                name='cpf'
+                placeholder="Digite seu CPF..."
+                onChange={(event) => {formatCPF(event.target.value)}}
                 required
             />
 
