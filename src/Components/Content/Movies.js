@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Movies({footerStatus}) {
+export default function Movies({footerStatus, setFooterStatus}) {
 
     const[movies, setMovies] = useState([]);
 
     useEffect(() => {
+
+        setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''});
+
         const promise = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/movies');
 
         promise.then(obj => {

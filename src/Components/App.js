@@ -22,17 +22,21 @@ export default function App(){
                 <Header
                     setFooterStatus={setFooterStatus}
                     setSelected={setSelected}
+                    footerStatus={footerStatus}
                 />
 
                 <Routes>
 
                     <Route path="/" element={<Movies
                                                 footerStatus={footerStatus}
+                                                setFooterStatus={setFooterStatus}
                                                 />} />
 
                     <Route path="/sessoes/:idFilme" element={<Sessions 
                                                                 setFooterStatus={setFooterStatus} 
                                                                 footerStatus={footerStatus}
+                                                                selected={selected}
+                                                                setSelected={setSelected}
                                                                 />} />
 
                     <Route path="/assentos/:idSessao" element={<Seats 

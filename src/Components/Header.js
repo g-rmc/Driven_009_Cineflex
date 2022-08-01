@@ -1,11 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Header({setFooterStatus, setSelected}) {
+export default function Header({setFooterStatus, setSelected, footerStatus}) {
+
+    let navigate = useNavigate();
+
+    let showReturn = footerStatus.show !== false ||  footerStatus.title !== '';
 
     return(
         
         <Container>
+            {showReturn === true ? 
+            <Return onClick={() => navigate(-1)}>{'<'}</Return> :
+            <></>
+            }
+            
             <Link to="/" style={{textDecoration:'none'}}>
                 <h1 onClick={() => {
                     setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})
@@ -36,5 +45,29 @@ const Container = styled.div`
         font-weight: 400;
         font-size: 34px;
         line-height: 40px;
+    }
+`
+
+const Return = styled.div`
+    position: absolute;
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8833a;
+    color: #c3cfd9;
+    font-weight: 400;
+    font-size: 30px;
+    left: 60px;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #b3632a;
+    }
+
+    &:active{
+        transform: translateY(2px);
     }
 `

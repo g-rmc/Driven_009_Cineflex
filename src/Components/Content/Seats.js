@@ -17,7 +17,7 @@ export default function Seats({setFooterStatus, footerStatus, selected, setSelec
         window.scrollTo(0,0);
 
         promise.then(obj => {
-            setFooterStatus({...footerStatus});
+            setFooterStatus({...footerStatus, show: true});
             setSeats(obj.data);
         })
     }, []);
