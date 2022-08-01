@@ -1,16 +1,14 @@
 import "./style.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-//import { Link } from "react-router-dom";
 import axios from "axios";
 import Form from "./Form";
 
-export default function Seats({setFooterStatus, footerStatus}) {
+export default function Seats({setFooterStatus, footerStatus, selected, setSelected}) {
 
     const { idSessao } = useParams();
 
     const[seats, setSeats] = useState([]);
-    const[selected, setSelected] = useState({ids: [], seats:[], name:'', cpf:''});
 
     const legend = [{class:'selected', title:'Selecionado'}, {class:'available', title:'Disponível'}, {class:'notAvailable', title:'Indisponível'}];
 
@@ -26,8 +24,6 @@ export default function Seats({setFooterStatus, footerStatus}) {
     if (seats.length === 0){
         return(<div className="center">Carregando...</div>)
     };
-
-    console.log(selected);
 
     function Seat({ isAvailable, name, id }) {
 
@@ -89,7 +85,7 @@ export default function Seats({setFooterStatus, footerStatus}) {
 
             </div>
 
-            <Form />
+            <Form selected={selected} setSelected={setSelected} footerStatus={footerStatus} setFooterStatus={setFooterStatus}/>
             
         </div>
     )

@@ -13,6 +13,7 @@ import Footer from "./Footer";
 export default function App(){
 
     const [footerStatus, setFooterStatus] = useState({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''});
+    const [selected, setSelected] = useState({ids: [], seats:[], name:'', cpf:''});
 
     return(
         <Container>
@@ -22,10 +23,26 @@ export default function App(){
 
                 <Routes>
 
-                    <Route path="/" element={<Movies footerStatus={footerStatus}/>} />
-                    <Route path="/sessoes/:idFilme" element={<Sessions setFooterStatus={setFooterStatus} footerStatus={footerStatus}/>} />
-                    <Route path="/assentos/:idSessao" element={<Seats setFooterStatus={setFooterStatus} footerStatus={footerStatus}/>} />
-                    <Route path="/sucesso" element={<End setFooterStatus={setFooterStatus}/>} />
+                    <Route path="/" element={<Movies
+                                                footerStatus={footerStatus}
+                                                />} />
+
+                    <Route path="/sessoes/:idFilme" element={<Sessions 
+                                                                setFooterStatus={setFooterStatus} 
+                                                                footerStatus={footerStatus}
+                                                                />} />
+
+                    <Route path="/assentos/:idSessao" element={<Seats 
+                                                                setFooterStatus={setFooterStatus}
+                                                                footerStatus={footerStatus}
+                                                                selected={selected}
+                                                                setSelected={setSelected}
+                                                                />} />
+                                                                
+                    <Route path="/sucesso" element={<End 
+                                                        footerStatus={footerStatus}
+                                                        selected={selected}
+                                                        />} />
 
                 </Routes>
 
