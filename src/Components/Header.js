@@ -7,7 +7,9 @@ export default function Header({setFooterStatus}) {
         
         <Container>
             <Link to="/" style={{textDecoration:'none'}}>
-                <h1 onClick={() => setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})}>CINEFLEX</h1>
+                <h1 onClick={() => setFooterStatus({show: false, title: '', posterURL: '', weekday: '', date: '', time: ''})}>
+                    CINEFLEX
+                </h1>
             </Link>     
         </Container>
     )

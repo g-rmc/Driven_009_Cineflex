@@ -40,6 +40,7 @@ export default function App(){
                                                                 />} />
                                                                 
                     <Route path="/sucesso" element={<End 
+                                                        setFooterStatus={setFooterStatus}
                                                         footerStatus={footerStatus}
                                                         selected={selected}
                                                         />} />
